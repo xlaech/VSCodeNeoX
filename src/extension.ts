@@ -44,10 +44,15 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 		
         if (args["text"] == " ") {
-            type(pressedKeysList.reduce((x,y) => x + y) + " ");
+            var key = sort(pressedKeysList.reduce((x,y) => x + y));
+
+            // if the lookuptable contains a lookup => write it out
+            if (lookUpDic.has(key)) {            
+                type(lookUpDic.get(key) + " ");
+            }
 
             pressedKeysList = [];
-        } else {            
+        } else {
             pressedKeysList.push(args["text"]);
         }
         
